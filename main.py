@@ -6,7 +6,7 @@ from bottoken import TOKEN
 from images import possumIMG
 
 # Initialize Bot and Denote The Command Prefix
-bot = commands.Bot(case_insensitive=True, command_prefix=">",activity= discord.Activity(type=discord.ActivityType.watching, name="poppy test catgirl"), status=discord.Status.dnd)
+bot = commands.Bot(case_insensitive=True, command_prefix=">",activity= discord.Activity(type=discord.ActivityType.listening, name="catgirl asmr"), status=discord.Status.online)
 bot.remove_command('help')
 
 
@@ -26,7 +26,14 @@ async def on_message(message):
     if message.content == 'do you love me catgirl':
         await message.channel.send(f'No, {message.author} no one does.')
     if message.content.startswith('im'):
-        await message.channel.send(f'Hi{message.content[2:]}, im dad.')
+        await message.channel.send(f'Hi{message.content[2:]}, i\'m catgirl.')
+    if message.content.startswith('i\'m'):
+        await message.channel.send(f'Hi{message.content[3:]}, i\'m catgirl.')
+    if message.content.startswith('Im'):
+        await message.channel.send(f'Hi{message.content[2:]}, i\'m catgirl.')
+    if message.content.startswith('I\'m'):
+        await message.channel.send(f'Hi{message.content[3:]}, i\'m catgirl.')
+    
 
     await bot.process_commands(message)
 
@@ -49,10 +56,6 @@ async def multi(ctx, arg1, arg2): # The name of the function is the name of the 
 @bot.command()
 async def wiki(ctx, wiki): # The name of the function is the name of the command
     await ctx.send('https://www.wikihow.com/wikiHowTo?search='+(str(wiki))) # ctx.send sends text in chat
-
-possumImage=["https://cdn.discordapp.com/attachments/946618549428969512/951281697226362891/IMG_9335.jpg", 
-"https://cdn.discordapp.com/attachments/946618549428969512/946619221830418493/IMG_9036.jpg", 
-"https://cdn.discordapp.com/attachments/946618549428969512/946619222119841862/IMG_9037.jpg"]
 
 @bot.command()
 async def possum(ctx):
