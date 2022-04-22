@@ -8,16 +8,16 @@ from discord.ext import commands
 from discord import guild
 from bottoken import TOKEN
 from images import possumIMG
-from happy import happyResponse
+#from happy import happyResponse
 from responses import complimentResponse, motivateResponse, insultResponse
 
-# Initialize Bot and Denote The Command Prefix
+# sets bot info on start
 bot = commands.Bot(case_insensitive=True, command_prefix=">",activity= discord.Activity(type=discord.ActivityType.listening, name="catgirl asmr"), status=discord.Status.online)
 slash = SlashCommand(bot, sync_commands=True)
-bot.remove_command('help') #disables the built in help command
+bot.remove_command('help') #disables the built in help command (fuck the built in help command)
 
 
-# Runs when Bot Succesfully Connects
+# login info
 @bot.event
 async def on_ready():
     print(f'{bot.user} succesfully logged in!')
@@ -52,17 +52,17 @@ async def on_message(message):
     if isinstance(message.channel, discord.channel.TextChannel):
         if "sad" in message.content.lower():
             await message.channel.send(f'Hey {message.author.mention}, wanna talk about it?')
-            await message.author.send("You should know that you are loved and also very cool.")
 
-    if isinstance(message.channel, discord.channel.DMChannel):
-        if "happy" in message.content.lower():
-            randHappy = random.randrange(0, len(happyResponse))
-            await message.author.send(happyResponse[randHappy])
+#wip conversational abilites 
+#    if isinstance(message.channel, discord.channel.DMChannel):
+#        if "happy" in message.content.lower():
+#            randHappy = random.randrange(0, len(happyResponse))
+#            await message.author.send(happyResponse[randHappy])
 
-    if isinstance(message.channel, discord.channel.DMChannel):
-        if "good" in message.content.lower():
-            randHappy = random.randrange(0, len(happyResponse))
-            await message.author.send(happyResponse[randHappy])
+#    if isinstance(message.channel, discord.channel.DMChannel):
+#        if "good" in message.content.lower():
+#            randHappy = random.randrange(0, len(happyResponse))
+#            await message.author.send(happyResponse[randHappy])
 
     if isinstance(message.channel, discord.channel.DMChannel):
             print(f'{message.author}> {message.content}')
@@ -147,10 +147,16 @@ async def _slash(ctx:SlashContext):
 
 @slash.slash(
     name="query",
-    description="information about the bot",
+    description="shows information about the bot",
 )
 async def _slash(ctx:SlashContext):
-    await ctx.send('This server is running catgirl Beta!\ncatgirl is written by poppy#0001 in Python 3\ncatgirl\'s pronouns are she/they\n`Thank you for helping test catgirl!`\n')
+    await ctx.send(
+'This server is running catgirl Beta!\n\
+catgirl is written by poppy#0001 in Python 3\n\
+Always open source @ github.com/ignpoppyseed/catgirl\n\
+catgirl\'s pronouns are she/they\n\
+`Thank you for helping test catgirl!`\n\
+')
 
 @slash.slash(
     name="help",
@@ -188,7 +194,7 @@ async def _slash(ctx:SlashContext, user:str):
 
 @slash.slash(
     name="insult",
-    description="have catgirl insult you!",
+    description="have catgirl insult someone!",
     options=[
         create_option(
             name="user",
@@ -218,7 +224,7 @@ async def _slash(ctx:SlashContext, user:str):
     randMoto = random.randrange(0, len(motivateResponse))
     await ctx.send(user.mention+' '+motivateResponse[randMoto])
 
-@slash.slash(
+'''@slash.slash(
     name="dm",
     description="have catgirl insult you!",
     options=[
@@ -239,6 +245,6 @@ async def _slash(ctx:SlashContext, user:str):
 async def _slash(ctx:SlashContext, user:str, message:str):
     per2dm=user
     await ctx.send(user.name+' says: '+message)
-    await ctx.per2dm.send(user.name+' says: '+message) 
+    await ctx.per2dm.send(user.name+' says: '+message) '''
 
 bot.run(TOKEN)
