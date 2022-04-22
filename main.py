@@ -1,4 +1,4 @@
-from calendar import c
+from email import message
 from typing_extensions import Required
 import discord
 import random
@@ -8,7 +8,8 @@ from discord.ext import commands
 from discord import guild
 from bottoken import TOKEN
 from images import possumIMG
-from images import bitchesIMG
+from happy import happyResponse
+from responses import complimentResponse, motivateResponse, insultResponse
 
 # Initialize Bot and Denote The Command Prefix
 bot = commands.Bot(case_insensitive=True, command_prefix=">",activity= discord.Activity(type=discord.ActivityType.listening, name="catgirl asmr"), status=discord.Status.online)
@@ -27,79 +28,47 @@ async def on_message(message):
     if message.author == bot.user: 
         return
     
-    if message.content == 'hello catgirl':
+    if message.content.lower() == 'hello catgirl':
         await message.channel.send(f'hello {message.author}!')
-    if message.content == 'do you love me catgirl':
+    if message.content.lower() == 'do you love me catgirl':
         await message.channel.send(f'No, {message.author} no one does.')
-    if message.content.startswith('im '):
-        await message.channel.send(f'Hi{message.content[2:]}, i\'m catgirl.')
-    if message.content.startswith('i\'m '):
-        await message.channel.send(f'Hi{message.content[3:]}, i\'m catgirl.')
-    if message.content.startswith('Im '):
-        await message.channel.send(f'Hi{message.content[2:]}, i\'m catgirl.')
-    if message.content.startswith('I\'m '):
-        await message.channel.send(f'Hi{message.content[3:]}, i\'m catgirl.')
-    
+
+    if isinstance(message.channel, discord.channel.TextChannel):    
+        if message.content.lower().startswith('im '):
+            await message.channel.send(f'Hi{message.content[2:]}, i\'m catgirl.')
+
+    if isinstance(message.channel, discord.channel.TextChannel):
+        if message.content.lower().startswith('i\'m '):
+            await message.channel.send(f'Hi{message.content[3:]}, i\'m catgirl.')
+
+    if isinstance(message.channel, discord.channel.TextChannel):
+        if "kys" in message.content.lower():
+            await message.channel.send(f'Hey {message.author.mention}, that\'s not nice!')
+
+    if isinstance(message.channel, discord.channel.TextChannel):
+        if "kms" in message.content.lower():
+            await message.channel.send(f'{message.author.mention}, pls dont')
+
+    if isinstance(message.channel, discord.channel.TextChannel):
+        if "sad" in message.content.lower():
+            await message.channel.send(f'Hey {message.author.mention}, wanna talk about it?')
+            await message.author.send("You should know that you are loved and also very cool.")
+
+    if isinstance(message.channel, discord.channel.DMChannel):
+        if "happy" in message.content.lower():
+            randHappy = random.randrange(0, len(happyResponse))
+            await message.author.send(happyResponse[randHappy])
+
+    if isinstance(message.channel, discord.channel.DMChannel):
+        if "good" in message.content.lower():
+            randHappy = random.randrange(0, len(happyResponse))
+            await message.author.send(happyResponse[randHappy])
+
+    if isinstance(message.channel, discord.channel.DMChannel):
+            print(f'{message.author}> {message.content}')
 
     await bot.process_commands(message)
 
-#These are the prefix based commands and do not require discord_slash to work.
-#@bot.command() <- Do not change
-#async def query(ctx): <- replace "query" with name of command
-    #await ctx.send('PLACEHOLDER') <- replace "PLACEHOLDER" with text you would like to send
-
-#@bot.command()
-#async def query(ctx): # The name of the function is the name of the command
-#    await ctx.send('this server is running catgirl2, by poppy.') # ctx.send sends text in chat
-
-#@bot.command()
-#async def catgirl(ctx): # the yellow text before (ctx) is the name of the command
-#    await ctx.send('yeah?') # the text in apostrophes is what is sent clientside
-
-#@bot.command()
-#async def help(ctx): # The name of the function is the name of the command
-#    await ctx.send('catgirl2 Help Menu!\nPrefix: >\n>query - information about the bot\n>multi (arg) (arg) - multiply two arguments\n>wiki (arg) - search wikihow\npossum - generate random possum image') # ctx.send sends text in chat
-
-#@bot.command()
-#async def multi(ctx, arg1, arg2): # The name of the function is the name of the command
-#    await ctx.send('That equals '+str(int(arg1) ** int(arg2))) # ctx.send sends text in chat
-
-#@bot.command()
-#async def wiki(ctx, wiki): # The name of the function is the name of the command
-#    await ctx.send('https://www.wikihow.com/wikiHowTo?search='+(str(wiki))) # ctx.send sends text in chat
-
-@bot.command()
-async def possum(ctx):
-    numImg = random.randrange(0, 21)
-    await ctx.send(('this command is deprecated, please use slash commands')+possumIMG[numImg])
-
-#These are slash commands and require discord_slash
-
-#@slash.slash(
-#    name="catgirl",
-#    description="slash test",
-#    guild_ids=[951027740256137226, 878297527412224041],
-#    options=[
-#        create_option(
-#            name="option",
-#            description="option1",
-#            required=True,
-#            option_type=3,
-#            choices=[
-#                create_choice(
-#                    name="choice1",
-#                    value="you selected: choice1"
-#                ),
-#                create_choice(
-#                    name="choice2",
-#                    value="you selected choice2"
-#                )
-#            ]
-#        )
-#    ]
-#)
-#async def _slash(ctx:SlashContext, option:str):
-#    await ctx.send(option)
 @slash.slash(
     name="nobitches",
     description="tell someone how few bitches they have",
@@ -166,7 +135,7 @@ async def _slash(ctx:SlashContext, option:str):
     description="send random possum",
 )
 async def _slash(ctx:SlashContext):
-    randPoss = random.randrange(0, 21)
+    randPoss = random.randrange(0, len(possumIMG))
     await ctx.send(possumIMG[randPoss])
 
 @slash.slash(
@@ -188,6 +157,88 @@ async def _slash(ctx:SlashContext):
     description="catgirl help menu",
 )
 async def _slash(ctx:SlashContext):
-    await ctx.send('Weclome to catgirl!\n**Commands:**\n/help - Shows this menu.\n/query - Shows information about catgirl.\n/catgirl - Call and response test.\n/possum - Sends a random possum image.\n/nobitches (option) - Sends a user chosen no bitches image.')
+    await ctx.send(
+'Weclome to catgirl!\n\
+**Commands:**\n\
+/help - Shows this menu.\n\
+/query - Shows information about catgirl.\n\
+/catgirl - Call and response test.\n\
+/possum - Sends a random possum image.\n\
+/nobitches (option) - Sends a user chosen no bitches image.\n\
+/compliment - Have catgirl compliment someone.\n\
+/insult - Have catgirl insult someone.\n\
+/motivate - Have catgirl motivate someone.\
+')
+
+@slash.slash(
+    name="compliment",
+    description="have catgirl compliment someone!",
+    options=[
+        create_option(
+            name="user",
+            description="Select a user to compliment!",
+            required=True,
+            option_type=6,
+        )
+    ]
+)
+async def _slash(ctx:SlashContext, user:str):
+    randComp = random.randrange(0, len(complimentResponse))
+    await ctx.send(user.mention+' '+complimentResponse[randComp])
+
+@slash.slash(
+    name="insult",
+    description="have catgirl insult you!",
+    options=[
+        create_option(
+            name="user",
+            description="Select a user to insult!",
+            required=True,
+            option_type=6,
+        )
+    ]
+)
+async def _slash(ctx:SlashContext, user:str):
+    randInsult = random.randrange(0, len(insultResponse))
+    await ctx.send(user.mention+' '+insultResponse[randInsult])
+
+@slash.slash(
+    name="motivate",
+    description="have catgirl motivate someone!",
+    options=[
+        create_option(
+            name="user",
+            description="Select a user to motivate!",
+            required=True,
+            option_type=6,
+        )
+    ]
+)
+async def _slash(ctx:SlashContext, user:str):
+    randMoto = random.randrange(0, len(motivateResponse))
+    await ctx.send(user.mention+' '+motivateResponse[randMoto])
+
+@slash.slash(
+    name="dm",
+    description="have catgirl insult you!",
+    options=[
+        create_option(
+            name="user",
+            description="select a user to DM",
+            required=True,
+            option_type=6,
+        ),
+        create_option(
+            name="message",
+            description="Message to send user",
+            required=True,
+            option_type=3,
+        )
+    ]
+)
+async def _slash(ctx:SlashContext, user:str, message:str):
+    per2dm=user
+    await ctx.send(user.name+' says: '+message)
+    await ctx.per2dm.send(user.name+' says: '+message) 
 
 bot.run(TOKEN)
