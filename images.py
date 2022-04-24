@@ -19,7 +19,23 @@ possumIMG=[
 "https://i.imgur.com/LxNftRP.jpg",
 "https://i.imgur.com/6e78oMD.jpg",
 "https://i.imgur.com/sKU9vHt.jpg",
-"https://i.imgur.com/NAwr6Pt.gif"
+"https://i.imgur.com/NAwr6Pt.gif",
+"https://i.imgur.com/l3MvtUN.jpg",
+"https://i.imgur.com/mFQz01C.jpg",
+"https://i.imgur.com/vrFGzbE.jpg",
+"https://i.imgur.com/dAMk6fs.jpg",
+"https://i.imgur.com/p3M1kLw.jpg",
+"https://i.imgur.com/4B8PiLW.jpg",
+"https://i.imgur.com/ggYX7r3.jpg",
+"https://i.imgur.com/WSL1l8H.jpg",
+"https://i.imgur.com/eSNZEi6.jpg",
+"https://i.imgur.com/nl2FeQC.jpg",
+"https://i.imgur.com/M1OkjoT.jpg",
+"https://i.imgur.com/MhWatjj.jpg",
+"https://i.imgur.com/mQAwlCF.jpg",
+"https://i.imgur.com/ksIaT8O.jpg",
+"https://i.imgur.com/pWeafrd.jpg",
+"https://i.imgur.com/UKAYaOd.jpg",
 ]
 
 bitchesIMG=[
