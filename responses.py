@@ -29,7 +29,7 @@ insultResponse=[
     "I hope you wake up soaked in pickle juice.",
     "Shut up or I'll bite your toes.",
     "If you had a mustache, it would smell like a dumpster sock.",
-    "You remind me of the reddit cum box."
+    "You remind me of the reddit cum box.",
     "You're the type of person to climb a glass wall to see what's on the other side",
     "Shut your mouth you bipedal potato sack."
 ]
